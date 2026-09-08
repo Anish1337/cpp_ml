@@ -473,6 +473,7 @@ Current implementation:
 * [x] Row-vector bias addition
 * [x] Row summation
 * [x] Tensor stream output
+* [x] MSE Loss
 
 Next steps:
 
@@ -481,8 +482,7 @@ Next steps:
 * [ ] `Linear` layer
 * [ ] Weight initialization
 * [ ] `ReLU` activation
-* [ ] Mean squared error loss
-* [ ] Backpropagation
+* [ ] Backpropagation (Linear layer)
 * [ ] Gradient descent updates
 * [ ] `NeuralNetwork` / sequential container
 * [ ] XOR training example
