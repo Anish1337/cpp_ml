@@ -23,7 +23,9 @@ public:
 
     // Basic operations
     [[nodiscard]] Tensor transpose() const;
+    [[nodiscard]] Tensor sum_rows() const;
 
+    // operator overload
     Tensor& operator+=(const Tensor& rhs);
     Tensor& operator-=(const Tensor& rhs);
     Tensor& operator*=(double scalar);

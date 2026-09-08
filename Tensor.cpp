@@ -1,6 +1,5 @@
 #include "Tensor.hpp"
 
-#include <algorithm>
 #include <iomanip>
 #include <ostream>
 #include <stdexcept>
@@ -40,7 +39,7 @@ Tensor::Tensor(
 double& Tensor::operator()(std::size_t row,
                            std::size_t col)
 {
-    return data_.at(index(row, col));
+    return data_[index(row, col)];
 }
 
 const double& Tensor::operator()(
@@ -228,6 +227,19 @@ std::ostream& operator<<(std::ostream& os,
     }
 
     return os;
+}
+
+Tensor Tensor::sum_rows() const
+{
+    Tensor result{1, cols_};
+
+    for (std::size_t r = 0; r < rows_; ++r) {
+        for (std::size_t c = 0; c < cols_; ++c) {
+            result(0, c) += (*this)(r, c);
+        }
+    }
+
+    return result;
 }
 
 void Tensor::add_row_vector(const Tensor& row)
