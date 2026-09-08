@@ -35,6 +35,6 @@ int main(){
 
     Tensor pred = net.forward(X);
 
-    std::cout<<"\nPredictions:\n" << prediction << '\n';
+    std::cout<<"\nPredictions:\n" << pred << '\n';
 
 }
