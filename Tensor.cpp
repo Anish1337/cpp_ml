@@ -209,15 +209,11 @@ Tensor matmul(const Tensor& lhs,
 std::ostream& operator<<(std::ostream& os,
                          const Tensor& tensor)
 {
-    for (std::size_t r = 0;
-         r < tensor.rows();
-         ++r) {
+    for (std::size_t r = 0; r < tensor.rows(); ++r) {
 
         os << "[ ";
 
-        for (std::size_t c = 0;
-             c < tensor.cols();
-             ++c) {
+        for (std::size_t c = 0; c < tensor.cols(); ++c) {
             os << std::setw(10)
                << tensor(r, c)
                << ' ';
@@ -251,14 +247,8 @@ void Tensor::add_row_vector(const Tensor& row)
         };
     }
 
-    for (std::size_t r = 0;
-         r < rows_;
-         ++r) {
-
-        for (std::size_t c = 0;
-             c < cols_;
-             ++c) {
-
+    for (std::size_t r = 0; r < rows_; ++r) {
+        for (std::size_t c = 0; c < cols_; ++c) {
             (*this)(r, c) += row(0, c);
         }
     }
