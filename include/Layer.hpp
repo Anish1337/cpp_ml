@@ -11,4 +11,3 @@ class Layer {
 
         virtual ~Layer() = default;
 };
- 
