@@ -24,7 +24,8 @@ public:
     // Basic operations
     [[nodiscard]] Tensor transpose() const;
     [[nodiscard]] Tensor sum_rows() const;
-
+    //todo
+    void add_row_vector(const Tensor& row);
     // operator overload
     Tensor& operator+=(const Tensor& rhs);
     Tensor& operator-=(const Tensor& rhs);
@@ -55,4 +56,3 @@ Tensor matmul(const Tensor& lhs, const Tensor& rhs);
 // Debugging / printing
 std::ostream& operator<<(std::ostream& os,
                          const Tensor& tensor);
-}

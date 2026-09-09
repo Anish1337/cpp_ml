@@ -1,6 +1,17 @@
+
 #include "Tensor.hpp"
+
+#include <iostream>
+
+int main()
+{
+    std::cout << "cpp_ml builds\n";
+    return 0;
+}
+
+/*#include "Tensor.hpp"
 #include "Linear.hpp"
-#include "RELU.hpp"
+#include "ReLU.hpp"
 #include "MSELoss.hpp"
 #include "NeuralNetwork.hpp"
 
@@ -37,4 +48,4 @@ int main(){
 
     std::cout<<"\nPredictions:\n" << pred << '\n';
 
-}
+}*/

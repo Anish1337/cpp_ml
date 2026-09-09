@@ -7,20 +7,20 @@ set(CMAKE_CXX_STANDARD_REQUIRED ON)
 set(CMAKE_CXX_EXTENSIONS OFF)
 
 add_library(cpp_ml
-    src/Tensor.cpp
-    src/MSELoss.cpp
+    core/Tensor.cpp
 )
 
 target_include_directories(cpp_ml
     PUBLIC
+        ${PROJECT_SOURCE_DIR}/core
         ${PROJECT_SOURCE_DIR}/include
 )
 
 add_executable(cpp_ml_example
-    src/main.cpp
+    nn/main.cpp
 )
 
 target_link_libraries(cpp_ml_example
-    PRIVATE
-        cpp_ml
+    PRIVATE cpp_ml
 )
+

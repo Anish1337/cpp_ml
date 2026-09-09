@@ -1,0 +1,5 @@
+# ninja log v7
+1	682	1788958553900174286	CMakeFiles/cpp_ml_example.dir/nn/main.cpp.o	9511575ac367bcb0
+0	786	1788958553899174263	CMakeFiles/cpp_ml.dir/core/Tensor.cpp.o	42f81fc9d2e2fe93
+786	823	1788958554685193065	libcpp_ml.a	267bce45b688de5
+823	864	1788958554722193950	cpp_ml_example	d8fd2ef11a6cbc80
