@@ -1,6 +1,7 @@
 #pragma once
 
 #include "Layer.hpp"
+#include <optional>
 
 class ReLU : public Layer {
 public:
@@ -8,5 +9,5 @@ public:
     Tensor backward(const Tensor& grad_output) override;
 
 private:
-    Tensor input_cache;
+    std::optional<Tensor> cached_input_;
 };

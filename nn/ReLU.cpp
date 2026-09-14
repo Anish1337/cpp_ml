@@ -1,4 +1,5 @@
 #include "ReLU.hpp"
+#include <stdexcept>
 
 Tensor ReLU::forward(const Tensor& input)
 {
@@ -19,11 +20,18 @@ Tensor ReLU::forward(const Tensor& input)
 
 Tensor ReLU::backward(const Tensor& grad_output)
 {
+    if (!cached_input_) {
+        throw std::logic_error("ReLU backward requires forward first");
+    }
+    if (grad_output.rows() != cached_input_->rows() ||
+        grad_output.cols() != cached_input_->cols()) {
+        throw std::invalid_argument("ReLU gradient shape mismatch");
+    }
     Tensor grad_input(grad_output.rows(), grad_output.cols());
 
     for (std::size_t i = 0; i < grad_output.rows(); ++i) {
         for (std::size_t j = 0; j < grad_output.cols(); ++j) {
-            grad_input(i, j) = cached_input_(i, j) > 0.0
+            grad_input(i, j) = (*cached_input_)(i, j) > 0.0
                 ? grad_output(i, j)
                 : 0.0;
         }
