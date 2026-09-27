@@ -7,14 +7,14 @@
 
 class Tensor {
 public:
+    // default ctor
     Tensor(std::size_t rows, std::size_t cols);
-
-    Tensor(std::initializer_list<
-        std::initializer_list<double>> values);
-
+    // initialized ctor
+    Tensor(std::initializer_list<std::initializer_list<double>> values);
+    // overload () operator
     double& operator()(std::size_t row, std::size_t col);
-    const double& operator()(std::size_t row,
-                             std::size_t col) const;
+    // const version
+    const double& operator()(std::size_t row, std::size_t col) const;
 
     // Shape
     [[nodiscard]] std::size_t rows() const noexcept;
@@ -24,7 +24,7 @@ public:
     // Basic operations
     [[nodiscard]] Tensor transpose() const;
     [[nodiscard]] Tensor sum_rows() const;
-    //todo
+    // todo
     void add_row_vector(const Tensor& row);
     // operator overload
     Tensor& operator+=(const Tensor& rhs);
@@ -38,8 +38,7 @@ private:
     std::vector<double> data_;
 
     [[nodiscard]]
-    std::size_t index(std::size_t row,
-                      std::size_t col) const;
+    std::size_t index(std::size_t row, std::size_t col) const;
 
     void check_same_shape(const Tensor& rhs) const;
 };
@@ -54,5 +53,4 @@ Tensor operator*(double scalar, Tensor tensor);
 Tensor matmul(const Tensor& lhs, const Tensor& rhs);
 
 // Debugging / printing
-std::ostream& operator<<(std::ostream& os,
-                         const Tensor& tensor);
+std::ostream& operator<<(std::ostream& os, const Tensor& tensor);
