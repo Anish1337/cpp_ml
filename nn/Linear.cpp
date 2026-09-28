@@ -4,8 +4,7 @@
 
 Linear::Linear(std::size_t inputs, std::size_t outputs, std::uint32_t seed)
     : weights_(inputs, outputs), bias_(1, outputs),
-      grad_weights_(inputs, outputs), grad_bias_(1, outputs)
-{
+      grad_weights_(inputs, outputs), grad_bias_(1, outputs) {
     if (inputs == 0 || outputs == 0) {
         throw std::invalid_argument("Linear dimensions must be positive");
     }
@@ -18,8 +17,8 @@ Linear::Linear(std::size_t inputs, std::size_t outputs, std::uint32_t seed)
             weights_(r, c) = distribution(generator);
 }
 
-Tensor Linear::forward(const Tensor& input)
-{
+Tensor Linear::forward(const Tensor& input) {
+    // wx+b
     Tensor output = matmul(input, weights_);
     output.add_row_vector(bias_);
     cached_input_ = input;
@@ -27,8 +26,7 @@ Tensor Linear::forward(const Tensor& input)
     return output;
 }
 
-Tensor Linear::backward(const Tensor& grad_output)
-{
+Tensor Linear::backward(const Tensor& grad_output) {
     if (!cached_input_) {
         throw std::logic_error("Linear backward requires forward first");
     }
@@ -36,22 +34,28 @@ Tensor Linear::backward(const Tensor& grad_output)
         grad_output.cols() != weights_.cols()) {
         throw std::invalid_argument("Linear gradient shape mismatch");
     }
+    // dW = xT dY
     grad_weights_ = matmul(cached_input_->transpose(), grad_output);
+    // db = sum(dY)
     grad_bias_ = grad_output.sum_rows();
+    // dX = dY wT
     gradients_ready_ = true;
     return matmul(grad_output, weights_.transpose());
 }
 
-void Linear::update(double learning_rate)
-{
+void Linear::update(double learning_rate) {
     if (!std::isfinite(learning_rate) || learning_rate < 0.0) {
-        throw std::invalid_argument("Learning rate must be finite and nonnegative");
+        throw std::invalid_argument(
+            "Learning rate must be finite and nonnegative");
     }
     if (!gradients_ready_) {
         throw std::logic_error("Linear update requires backward first");
     }
+    // W=W-(lr*dW)
     weights_ -= learning_rate * grad_weights_;
+    // b=b-(lr*dY)
     bias_ -= learning_rate * grad_bias_;
     gradients_ready_ = false;
+    // clear cached input after backprop
     cached_input_.reset();
 }
